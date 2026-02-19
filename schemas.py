@@ -1,5 +1,6 @@
 from pydantic import BaseModel, field_validator
 from datetime import datetime
+from typing import Literal
 from typing import Optional
 from enum import Enum
 
@@ -60,7 +61,31 @@ class TokenOut(BaseModel):
 #----------------------
 # Game
 #----------------------
+class GameCreate(BaseModel):
+    difficulty: Literal["easy", "medium", "hard"]
+
+class GameResponse(BaseModel):
+    id: int
+    user_id: int
+    difficulty: str
+    score: int | None
+    status: str
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
 
 #----------------------
 # Move
 #----------------------
+class MoveCreate(BaseModel):
+    guess: str
+class MoveResponse(BaseModel):
+    id: int
+    game_id: int
+    turn_number: int
+    guess: str
+    correct_positions: int
+    wrong_positions: int
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
