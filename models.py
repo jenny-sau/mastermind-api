@@ -31,7 +31,7 @@ class DifficultyStatus(str, PyEnum):
     EASY = "easy"
     MEDIUM = "medium"
     HARD = "hard"
-    HARDCORE = "hardcore"
+    EVIL = "evil"
 
 class Game (Base):
     __tablename__ = "games"

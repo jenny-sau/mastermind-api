@@ -62,7 +62,7 @@ class TokenOut(BaseModel):
 # Game
 #----------------------
 class GameCreate(BaseModel):
-    difficulty: Literal["easy", "medium", "hard"]
+    difficulty: Literal["easy", "medium", "hard", "evil"]
 
 class GameResponse(BaseModel):
     id: int

@@ -26,8 +26,8 @@ def generate_solution(difficulty: str) -> str:
     return ",".join(pegs_to_find)
 
 def check_guess(solution: str, guess: str) -> tuple[int, int]:
-    solution_list = solution.split(",")
-    guess_list = guess.split(",")
+    solution_list = [c.strip() for c in solution.split(",")]
+    guess_list = [c.strip() for c in guess.split(",")]
 
     black_tokens = 0
     white_tokens = 0
