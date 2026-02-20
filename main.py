@@ -59,7 +59,8 @@ def get_current_user(
 @app.post(
     "/auth/signup",
     response_model=UserResponse,
-    status_code = status.HTTP_201_CREATED
+    status_code = status.HTTP_201_CREATED,
+    tags=["Auth"]
 )
 def signup(user: UserSignup, db: Session = Depends(get_db)):
     """Create a new user account."""
@@ -88,7 +89,8 @@ def signup(user: UserSignup, db: Session = Depends(get_db)):
 @app.post(
     "/auth/login",
     response_model=TokenOut,
-    status_code=status.HTTP_200_OK
+    status_code=status.HTTP_200_OK,
+    tags=["Auth"]
 )
 def login(
         credentials: UserLogin,
@@ -118,7 +120,8 @@ def login(
 @app.post(
     "/game/create",
     response_model=GameResponse,
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED,
+    tags=["Game"]
     )
 def create_game(
         game_data: GameCreate,
@@ -143,7 +146,8 @@ def create_game(
 @app.post(
     "/game/{game_id}/move",
     response_model = MoveResponse,
-    status_code = status.HTTP_201_CREATED
+    status_code = status.HTTP_201_CREATED,
+    tags=["Game"]
     )
 def play_move(
         game_id:int,
@@ -184,7 +188,68 @@ def play_move(
     db.refresh(new_move)
     return new_move
 
+@app.get(
+    "/game/{game_id}/moves",
+    response_model=list[MoveResponse],
+    status_code=status.HTTP_200_OK,
+    tags=["Move"]
+)
+def get_moves(
+        game_id: int,
+        current_user: models.User = Depends(get_current_user),
+        db: Session = Depends(get_db)
+):
+    """View the history of moves in a game. """
+    game = db.query(models.Game).filter(
+        models.Game.id == game_id,
+        models.Game.user_id == current_user.id
+    ).first()
+    if not game:
+        raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail="Game not found")
+
+    moves = db.query(models.Move).filter(
+        models.Move.game_id == game_id
+    ).order_by(models.Move.turn_number).all()
+
+    return moves
 
 
+@app.get(
+    "/game/{game_id}",
+    response_model=GameResponse,
+    status_code=status.HTTP_200_OK,
+    tags=["Game"]
+)
+def get_game(
+        game_id: int,
+        current_user: models.User = Depends(get_current_user),
+        db: Session = Depends(get_db)
+):
+    """View the status of a game"""
+    game = db.query(models.Game).filter(
+        models.Game.id == game_id,
+        models.Game.user_id == current_user.id
+    ).first()
 
+    if not game:
+        raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail="Game not found")
+
+    return game
+
+@app.get(
+    "/games",
+    response_model=list[GameResponse],
+    status_code=status.HTTP_200_OK,
+    tags=["Game"]
+)
+def get_all_games(
+        current_user: models.User = Depends(get_current_user),
+        db: Session = Depends(get_db)
+):
+    """See all your games"""
+    games = db.query(models.Game).filter(
+        models.Game.user_id == current_user.id
+    ).order_by(models.Game.created_at.desc()).all()
+
+    return games
 
