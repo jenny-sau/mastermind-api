@@ -13,9 +13,8 @@ colors= ['red', 'yellow', 'blue', 'green', 'black', 'white', 'orange', 'purple']
 def generate_solution(difficulty: str) -> str:
     lengths = {
         "easy": 4,
-        "medium": 4,
-        "hard": 5,
-        "evil": 6
+        "medium": 5,
+        "hard": 6,
     }
     length = lengths[difficulty]
 
@@ -72,8 +71,7 @@ def calculate_score(difficulty: str, turn_number: int, max_turns: int = 12) -> i
     multiplicator = {
         "easy": 1,
         "medium": 1.5,
-        "hard": 2,
-        "evil": 3
+        "hard": 2
     }
 
     score = (max_turns - turn_number)*10*multiplicator[difficulty]
