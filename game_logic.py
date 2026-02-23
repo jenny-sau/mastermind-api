@@ -9,19 +9,34 @@ import random
 
 colors= ['red', 'yellow', 'blue', 'green', 'black', 'white', 'orange', 'purple']
 
-#Computer picks x pegs
+# Configuration des difficultés (nombre de couleurs disponibles)
+DIFFICULTY_COLORS = {
+    "easy": 4,  # red, yellow, blue, green
+    "medium": 6,  # + white, black
+    "hard": 8,  # + orange, purple
+
+}
+DIFFICULTY_MAX_TURNS = {
+    "easy": 12,
+    "medium": 10,
+    "hard": 8,
+    "hardcore": 6
+}
+
+
 def generate_solution(difficulty: str) -> str:
-    lengths = {
-        "easy": 4,
-        "medium": 5,
-        "hard": 6,
-    }
-    length = lengths[difficulty]
+    # Nombre de couleurs selon la difficulté
+    num_colors = DIFFICULTY_COLORS[difficulty]
+    available_colors = colors[:num_colors]  # Prend les N premières couleurs
+
+    # Toujours 4 positions à deviner
+    length = 4
 
     pegs_to_find = []
     for i in range(length):
-        peg = random.choice(colors)
+        peg = random.choice(available_colors)
         pegs_to_find.append(peg)
+
     return ",".join(pegs_to_find)
 
 def check_guess(solution: str, guess: str) -> tuple[int, int]:
@@ -66,14 +81,18 @@ def is_game_won(solution: str, guess: str) -> bool:
         return False
 
 
-def calculate_score(difficulty: str, turn_number: int, max_turns: int = 12) -> int:
+def calculate_score(difficulty: str, turn_number: int) -> int:
     """Calculates the final score of a game won."""
+
     multiplicator = {
         "easy": 1,
         "medium": 1.5,
-        "hard": 2
+        "hard": 2,
+        "hardcore": 3
     }
 
-    score = (max_turns - turn_number)*10*multiplicator[difficulty]
+    max_turns = DIFFICULTY_MAX_TURNS[difficulty]
+
+    score = (max_turns - turn_number) * 10 * multiplicator[difficulty]
     return int(score)
 

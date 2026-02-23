@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_201_CREATED
@@ -14,9 +15,19 @@ from schemas import (
     GameCreate, GameResponse,
     MoveCreate, MoveResponse
 )
-from game_logic import generate_solution, check_guess, is_game_won, calculate_score
+from game_logic import generate_solution, check_guess, is_game_won, calculate_score, DIFFICULTY_MAX_TURNS
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
@@ -181,7 +192,8 @@ def play_move(
     if is_game_won(game.solution, move_data.guess):
         game.status = "won"
         game.score = calculate_score(game.difficulty, turn_number)
-    elif turn_number >= 12:
+
+    elif turn_number >= DIFFICULTY_MAX_TURNS[game.difficulty]:
         game.status = "lost"
 
     db.commit()
