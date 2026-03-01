@@ -19,8 +19,7 @@ DIFFICULTY_COLORS = {
 DIFFICULTY_MAX_TURNS = {
     "easy": 12,
     "medium": 10,
-    "hard": 8,
-    "hardcore": 6
+    "hard": 8
 }
 
 
@@ -86,13 +85,12 @@ def calculate_score(difficulty: str, turn_number: int) -> int:
 
     multiplicator = {
         "easy": 1,
-        "medium": 1.5,
-        "hard": 2,
-        "hardcore": 3
+        "medium": 2,
+        "hard": 3
     }
 
     max_turns = DIFFICULTY_MAX_TURNS[difficulty]
 
-    score = (max_turns - turn_number) * 10 * multiplicator[difficulty]
+    score = (max_turns - turn_number + 1) * 10 * multiplicator[difficulty]
     return int(score)
 
