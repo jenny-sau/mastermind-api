@@ -78,8 +78,8 @@ def second_user_token(client):
 #-------------------
 # Fixture for create games
 
-@pytest.fixture
-def create_easy_game (client, user_token):
+@pytest.fixture(params=["easy", "medium", "hard"])
+def create_game (client, user_token,request):
     #GIVEN
     headers = {"Authorization": f"Bearer {user_token}"}
     #WHEN
@@ -87,43 +87,7 @@ def create_easy_game (client, user_token):
         "/game/create",
         json = {
 
-        "difficulty": "easy"
-        },
-        headers = headers
-    )
-    #THEN
-    assert response.status_code == 201
-    game_id = response.json()["id"]
-    return game_id
-
-@pytest.fixture
-def create_medium_game (client, user_token):
-    #GIVEN
-    headers = {"Authorization": f"Bearer {user_token}"}
-    #WHEN
-    response = client.post(
-        "/game/create",
-        json = {
-
-        "difficulty": "medium"
-        },
-        headers = headers
-    )
-    #THEN
-    assert response.status_code == 201
-    game_id = response.json()["id"]
-    return game_id
-
-@pytest.fixture
-def create_hard_game (client, user_token):
-    #GIVEN
-    headers = {"Authorization": f"Bearer {user_token}"}
-    #WHEN
-    response = client.post(
-        "/game/create",
-        json = {
-
-        "difficulty": "hard"
+        "difficulty": request.param
         },
         headers = headers
     )
