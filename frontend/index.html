@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mastermind</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Mastermind</h1>
+
+    <!-- ========================= -->
+    <!-- AUTH SECTION -->
+    <!-- ========================= -->
+<div id="auth-section">
+
+    <h2 id="auth-title">Log in</h2>
+
+    <form id="login-form">
+        <input type="text" id="login-username" placeholder="Username" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button type="submit">Log in</button>
+    </form>
+
+    <form id="signup-form" style="display:none;">
+        <input type="text" id="signup-username" placeholder="Username" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button type="submit">Create account</button>
+    </form>
+
+    <p id="signup-text">
+        Not registered yet?
+        <a href="#" id="show-signup-link">Create an account</a>
+    </p>
+
+    <p id="login-text" style="display:none;">
+        Already have an account?
+        <a href="#" id="show-login-link">Log in</a>
+    </p>
+
+</div>
+
+
+    <!-- ========================= -->
+    <!-- MENU SECTION (after login) -->
+    <!-- ========================= -->
+    <div id="game-section" style="display:none;">
+
+        <p>Welcome <span id="username-display"></span>!</p>
+
+        <button id="create-game-btn">Start a game</button>
+        <button id="logout-btn">Logout</button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- DIFFICULTY MODAL -->
+<!-- ========================= -->
+<div id="difficulty-modal" style="display:none;">
+
+    <div class="modal-content">
+
+        <h3>Choose difficulty</h3>
+
+        <div class="difficulty-slider">
+            <input type="range" id="difficulty-range" min="1" max="3" value="1">
+            <p id="difficulty-label">Easy</p>
+        </div>
+
+        <div class="modal-buttons">
+            <button id="start-game-btn">Start</button>
+    
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- PLAY SECTION -->
+<!-- ========================= -->
+<div id="play-section" style="display:none;">
+
+    <div class="game-container">
+
+        <h2>Mastermind Game</h2>
+
+        <!-- Palette dynamique -->
+        <div id="color-palette"></div>
+
+        <!-- Submit -->
+        <div id="guess-area">
+            <button id="submit-guess-btn">Submit Guess</button>
+        </div>
+
+        <!-- Board -->
+        <div id="board">
+            <h3>Let's play</h3>
+        </div>
+
+        <!-- Bottom Buttons -->
+        <div class="top-buttons">
+            <button id="play-again">New Game</button>
+            <button id="rules-btn">Rules reminder</button>
+        </div>
+        <div id="best-score-box">
+        Your best score: <span id="best-score-value">0</span>
+</div>
+
+    </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
