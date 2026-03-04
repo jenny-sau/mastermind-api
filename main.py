@@ -4,7 +4,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_201_CREATED
 
-from database import get_db
+from database import get_db, Base, engine
 import models
 from auth import hash_password, verify_password, create_access_token, decode_access_token
 from schemas import (
@@ -18,6 +18,9 @@ from schemas import (
 from game_logic import generate_solution, check_guess, is_game_won, calculate_score, DIFFICULTY_MAX_TURNS
 
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
