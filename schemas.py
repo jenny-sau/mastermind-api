@@ -88,5 +88,7 @@ class MoveResponse(BaseModel):
     correct_positions: int
     wrong_positions: int
     created_at: datetime
+    game_status: str | None = None
+    score: int | None = None
 
     model_config = {"from_attributes": True}

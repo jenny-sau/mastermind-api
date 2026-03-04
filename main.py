@@ -203,6 +203,10 @@ def play_move(
 
     db.commit()
     db.refresh(new_move)
+
+    new_move.game_status = game.status
+    new_move.score = game.score
+
     return new_move
 
 @app.get(
