@@ -8,21 +8,30 @@ Backend: FastAPI, PostgreSQL, SQLAlchemy, JWT Auth
 
 Frontend: HTML, CSS, JavaScript
 
-Outils: Docker, Pytest, GIT, Alembic
+Outils: Docker, Pytest, Git, Alembic
 
+## Architecture
 
-#### Le mastermind en bref:
+Le projet est organisé en trois couches :
+
+- API (FastAPI) : gestion des routes et validation
+- Logique métier : fonctions pures dans `game_logic.py`
+- Accès aux données : modèles SQLAlchemy (User → Game → Move)
+
+## Le jeu en bref:
 
 Le Mastermind est un célèbre jeu dans lequel le but est de trouver une combinaison secrète de couleurs.
 Les règles : Le joueur doit deviner quelles couleurs sont dans la combinaison et dans quel ordre. Pour cela, il teste des combinaisons et reçoit un feedback après chaque essai.
 
 
-###### Les Feedbacks:
+#### Les Feedbacks:
  - Jeton blanc → bonne couleur, mauvais emplacement
  - Jeton noir → bonne couleur, bon emplacement
  - Aucun jeton → rien ne correspond
 - ⚫⚫⚫⚫ 4 jetons noirs → le joueur gagne la partie !
 
+#### Exemple de partie gagnante:
+![Swagger overview](screenshots/won.png)
 
 ###### Les niveaux:
 J’ai décidé de créer 3 niveaux différents:
@@ -34,7 +43,34 @@ J’ai décidé de créer 3 niveaux différents:
 | Difficile | 8 | 8 |
 
 
+<div align="center">
+  <div style="display:inline-block; width:30%; vertical-align:top">
+    <p> Partie niveau facile</p>
+    <img src="screenshots/easy.png" width="100%">
+  </div>
+  <div style="display:inline-block; width:30%; vertical-align:top">
+    <p> Partie niveau moyen</p>
+    <img src="screenshots/medium.png" width="100%">
+  </div>
+  <div style="display:inline-block; width:30%; vertical-align:top">
+    <p> Partie niveau difficile</p>
+    <img src="screenshots/hard.png" width="100%">
+  </div>
+</div>
 
+#### Système de score
+
+Le score dépend :
+- de la difficulté (multiplicateur)
+- du nombre de tours utilisés
+
+Formule :
+(max_turns - turn_number + 1) × 10 × multiplicateur
+
+Multiplicateurs :
+- easy ×1
+- medium ×2
+- hard ×3
 
 ## Fonctionnalités
 - Inscription et connexion sécurisée (JWT)
