@@ -43,20 +43,9 @@ J’ai décidé de créer 3 niveaux différents:
 | Difficile | 8 | 8 |
 
 
-<div align="center">
-  <div style="display:inline-block; width:30%; vertical-align:top">
-    <p> Partie niveau facile</p>
-    <img src="screenshots/easy.png" width="100%">
-  </div>
-  <div style="display:inline-block; width:30%; vertical-align:top">
-    <p> Partie niveau moyen</p>
-    <img src="screenshots/medium.png" width="100%">
-  </div>
-  <div style="display:inline-block; width:30%; vertical-align:top">
-    <p> Partie niveau difficile</p>
-    <img src="screenshots/hard.png" width="100%">
-  </div>
-</div>
+| Partie niveau facile | Partie niveau moyen | Partie niveau difficile |
+|----------------------|---------------------|--------------------------|
+| ![](screenshots/easy.png) | ![](screenshots/medium.png) | ![](screenshots/hard.png) |
 
 #### Système de score
 
