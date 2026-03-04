@@ -2,11 +2,15 @@ import bcrypt
 from jose import jwt
 from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException, status
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # JWT configuration
 # ⚠️ PRODUCTION: Utiliser des variables d'environnement !
 # export SECRET_KEY="votre-clé-ultra-sécurisée-32-caractères"
-SECRET_KEY = "clé_secrète_pour_jouer_au_mastermind"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_HOURS = 168  # 7 jours
 
