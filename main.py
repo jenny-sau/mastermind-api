@@ -25,9 +25,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://127.0.0.1:5500",
-        "http://localhost:5500",
-        "http://localhost:63342",
-        "https://heartfelt-snickerdoodle-4d0028.netlify.app"
+        "https://69a844cfb1413af03b11a7c7--heartfelt-snickerdoodle-4d0028.netlify.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
