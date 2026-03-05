@@ -455,6 +455,7 @@ document.getElementById('submit-guess-btn').addEventListener('click', async () =
         }
 
         const result = await response.json();
+        console.log(result);
 
         handleGameStatus(result);
         updateBoard(result);
