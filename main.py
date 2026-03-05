@@ -21,12 +21,15 @@ app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
+origins = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "https://heartfelt-snickerdoodle-4d0028.netlify.app"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:5500",
-        "https://69a844cfb1413af03b11a7c7--heartfelt-snickerdoodle-4d0028.netlify.app"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
