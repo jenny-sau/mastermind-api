@@ -485,17 +485,19 @@ function updateBoard(move) {
     const feedback = row.querySelector(".feedback");
     feedback.innerHTML = "";
 
-    for (let i = 0; i < move.correct_positions; i++) {
-        const peg = document.createElement("div");
-        peg.style.backgroundColor = "black";
-        feedback.appendChild(peg);
-    }
+    // Noir → correct
+for (let i = 0; i < move.correct_positions; i++) {
+    const peg = document.createElement("div");
+    peg.classList.add("correct");  //
+    feedback.appendChild(peg);
+}
 
-    for (let i = 0; i < move.wrong_positions; i++) {
-        const peg = document.createElement("div");
-        peg.style.backgroundColor = "white";
-        feedback.appendChild(peg);
-    }
+// Blanc → misplaced
+for (let i = 0; i < move.wrong_positions; i++) {
+    const peg = document.createElement("div");
+    peg.classList.add("misplaced");  //
+    feedback.appendChild(peg);
+}
 
     currentRowIndex++;
 }
