@@ -487,19 +487,24 @@ function updateBoard(move) {
     const feedback = row.querySelector(".feedback");
     feedback.innerHTML = "";
 
-    // Noir → correct
+    const fragment = document.createDocumentFragment();
+
+// Noir
 for (let i = 0; i < move.correct_positions; i++) {
     const peg = document.createElement("div");
-    peg.classList.add("correct");  //
-    feedback.appendChild(peg);
+    peg.classList.add("correct");
+    fragment.appendChild(peg);
 }
 
-// Blanc → misplaced
+// Blanc
 for (let i = 0; i < move.wrong_positions; i++) {
     const peg = document.createElement("div");
-    peg.classList.add("misplaced");  //
-    feedback.appendChild(peg);
+    peg.classList.add("misplaced");
+    fragment.appendChild(peg);
 }
+
+feedback.innerHTML = "";
+feedback.appendChild(fragment);
 
     currentRowIndex++;
 }
