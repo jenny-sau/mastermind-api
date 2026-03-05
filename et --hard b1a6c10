@@ -1,0 +1,32 @@
+[33md22a315[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m fix win detection bug
+[33me1f05d5[m fix win detection bug
+[33m45b6eaa[m fix win detection bug
+[33mb1a6c10[m Change in JS
+[33m4da16dd[m fix cors
+[33m2a9d8e1[m Add Netlify origin to CORS
+[33ma53681c[m Use move response to handle game status instead of extra API call
+[33md366212[m Fix feedback rendering on Safari iOS
+[33mf525c92[m Change in schema pydantic, add game_status in MoveResponse
+[33m3442145[m Add Netlify origin to CORS
+[33m2af4361[m Auto create tables on startup
+[33m60c813a[m Add Procfile for Railway deployment
+[33m965179f[m Add environnement variable with python-dotenv
+[33m284906b[m Complete README with screenshots
+[33mcfde2bf[m Complete README with screenshots
+[33md5fb1f8[m Add Fronted
+[33m1362391[m Add README and requirements.txt
+[33m06cb1d4[m Add complete test suite: test_auth, test_game, test_game_logic
+[33m5b6fa31[m Add test_game.py with full coverage
+[33mc76426f[m change in fixture create_game with params
+[33mca51fcf[m Add pytest setup: conftest with client, auth and game fixture
+[33m17032ab[m Polish: Improve error messages in auth routes
+[33ma12a091[m Remove evil difficulty and update PostgreSQL enum
+[33m17ffa04[m Full MasterMind API with all routes
+[33mf7cbbe8[m Complete Phase 4: Game logic and routes (create game, play moves)
+[33m12ef500[m Add Game and Move schemas
+[33mbf520c9[m Add game logic
+[33me860c36[m Authentication with JWT (signup, login, protected routes)
+[33m8c01869[m Add database models and migrations (User, Game, Move)
+[33m6e47c13[m Setup project: FastAPI, Docker, PostgreSQL
+[33me17a3a6[m Add gitignore
+[33m2686732[m Project setup
