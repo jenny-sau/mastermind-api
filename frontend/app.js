@@ -456,10 +456,9 @@ document.getElementById('submit-guess-btn').addEventListener('click', async () =
 
         const result = await response.json();
 
+        handleGameStatus(result);
         updateBoard(result);
         resetGuess();
-
-        handleGameStatus(result);
 
     } catch (error) {
         alert("Connection error: " + error);
