@@ -287,11 +287,12 @@ button:active {
 ========================== */
 
 .feedback {
-    display: grid;
-    grid-template-columns: repeat(2, 10px);
-    grid-template-rows: repeat(2, 10px);
+    display: flex;
+    flex-wrap: wrap;
+    width: 24px;
     gap: 4px;
     margin-left: 10px;
+    align-content: flex-start;
 }
 
 .feedback div {
