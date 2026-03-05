@@ -455,9 +455,11 @@ document.getElementById('submit-guess-btn').addEventListener('click', async () =
         }
 
         const result = await response.json();
+
         updateBoard(result);
         resetGuess();
-        checkGameStatus();
+
+        handleGameStatus(result);
 
     } catch (error) {
         alert("Connection error: " + error);
@@ -502,49 +504,31 @@ for (let i = 0; i < move.wrong_positions; i++) {
     currentRowIndex++;
 }
 
+function handleGameStatus(result) {
 
+    if (result.status === "won") {
 
-// ==========================
-// CHECK STATUS
-// ==========================
+        alert(`🎉 You won! Your score: ${result.score} points`);
 
-async function checkGameStatus() {
-
-    const response = await fetch(
-        API_URL + `/game/${currentGameId}`,
-        {
-            headers: {
-                'Authorization': 'Bearer ' + authToken
-            }
+        if (result.score > bestScore) {
+            bestScore = result.score;
+            localStorage.setItem("bestScore", bestScore);
+            document.getElementById("best-score-value").textContent = bestScore;
         }
-    );
+    }
 
-    if (!response.ok) return;
-
-    const game = await response.json(); // ← on prend directement l'objet
-
-    if (!game) return;
-
-    if (game.status === "won") 
-        {alert(`🎉 You won! Your score: ${game.score} points`);
-        if (game.score > bestScore) {
-        bestScore = game.score;
-        localStorage.setItem("bestScore", bestScore);
-        document.getElementById("best-score-value").textContent = bestScore;
-}        
-}
-
-    if (game.status === "lost") {
+    if (result.status === "lost") {
 
         alert("💀 You lost!");
 
-        if (game.solution) {
-            showSolution(game.solution);
+        if (result.solution) {
+            showSolution(result.solution);
         }
 
         document.getElementById("submit-guess-btn").disabled = true;
     }
 }
+
 
 function showSolution(solution) {
 

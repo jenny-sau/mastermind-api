@@ -1,0 +1,155 @@
+[33mcommit acfd37558fcdce124270af27223f8f7a9b0ceb85[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Thu Mar 5 09:01:10 2026 +0700
+
+    Fix feedback rendering on Safari iOS
+
+[33mcommit d3662125ddf186e932c140ed428f599b14381fc8[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Thu Mar 5 08:46:30 2026 +0700
+
+    Fix feedback rendering on Safari iOS
+
+[33mcommit f525c92bdcbdf72fe04019ebc22544aca7186245[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 22:27:44 2026 +0700
+
+    Change in schema pydantic, add game_status in MoveResponse
+
+[33mcommit 3442145f8ef963c305b16d2d5bfcab9a9c94c77c[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 21:46:23 2026 +0700
+
+    Add Netlify origin to CORS
+
+[33mcommit 2af43618034a363167d73513580fe5fb06e000ba[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 21:13:49 2026 +0700
+
+    Auto create tables on startup
+
+[33mcommit 60c813a1fd5014bfb6e8ae7dd268b0d7c7b8d3ef[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 18:23:08 2026 +0700
+
+    Add Procfile for Railway deployment
+
+[33mcommit 965179fc9a2ea7c86a45e2b442636712a25912b0[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 16:42:11 2026 +0700
+
+    Add environnement variable with python-dotenv
+
+[33mcommit 284906bfeb27ac177bbbbafdf620b3fe30b090b4[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 14:50:39 2026 +0700
+
+    Complete README with screenshots
+
+[33mcommit cfde2bfdd79dbede3932164d02237712ccd91673[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Mar 4 14:47:36 2026 +0700
+
+    Complete README with screenshots
+
+[33mcommit d5fb1f8532d9ececb5fa7ee4a0230461f019fc88[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Mon Mar 2 15:35:19 2026 +0700
+
+    Add Fronted
+
+[33mcommit 136239183475c1897cfc21c2c94da3c69c4c24cd[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Mon Mar 2 15:30:38 2026 +0700
+
+    Add README and requirements.txt
+
+[33mcommit 06cb1d418b918a5bc4b6b091adda19f1ecfa3233[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Mon Mar 2 14:35:40 2026 +0700
+
+    Add complete test suite: test_auth, test_game, test_game_logic
+
+[33mcommit 5b6fa311f2f92808faa0bb0a7f62112d753b7af6[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Mon Mar 2 10:56:49 2026 +0700
+
+    Add test_game.py with full coverage
+
+[33mcommit c76426f8f67cca1669728ca70016195855ca228b[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Sun Mar 1 16:36:47 2026 +0700
+
+    change in fixture create_game with params
+
+[33mcommit ca51fcf7623bba0c9e73bf3f2abbd3d0ba73b065[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Sun Mar 1 15:21:29 2026 +0700
+
+    Add pytest setup: conftest with client, auth and game fixture
+
+[33mcommit 17032abf50a4d8f66bfbe343aa54e39f78930887[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Mon Feb 23 13:48:02 2026 +0700
+
+    Polish: Improve error messages in auth routes
+
+[33mcommit a12a091feeae3843c912393381a6161d09391441[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Sun Feb 22 16:14:19 2026 +0700
+
+    Remove evil difficulty and update PostgreSQL enum
+
+[33mcommit 17ffa0412642e74eab4a34ea7fd21994012fb35e[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Fri Feb 20 08:56:15 2026 +0700
+
+    Full MasterMind API with all routes
+
+[33mcommit f7cbbe8b3ebe079c7e02dfc4772d2460287882a0[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Thu Feb 19 16:13:20 2026 +0700
+
+    Complete Phase 4: Game logic and routes (create game, play moves)
+
+[33mcommit 12ef500626e7a0f6ab860b04ca896cde0a52ef90[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Thu Feb 19 14:31:20 2026 +0700
+
+    Add Game and Move schemas
+
+[33mcommit bf520c9867443da9f1bb6cec38db8903c6501cef[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Thu Feb 19 11:24:03 2026 +0700
+
+    Add game logic
+
+[33mcommit e860c3601f99e68c379e3c6bdd08ad1ca45f1226[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Feb 18 16:04:54 2026 +0700
+
+    Authentication with JWT (signup, login, protected routes)
+
+[33mcommit 8c01869acb58a60eb8b4026c7bd28e25fd58408a[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Feb 18 12:56:50 2026 +0700
+
+    Add database models and migrations (User, Game, Move)
+
+[33mcommit 6e47c13982e290fcae1378623ff07ebfd96fc6eb[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Feb 18 11:10:02 2026 +0700
+
+    Setup project: FastAPI, Docker, PostgreSQL
+
+[33mcommit e17a3a6b1732e233152deef5925e7d87f5fdaeb9[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Feb 18 09:57:12 2026 +0700
+
+    Add gitignore
+
+[33mcommit 2686732056cdc7caa4ae89f1db6d1d9b81fda301[m
+Author: Jenny Saucy <jenny.saucy@outlook.com>
+Date:   Wed Feb 18 09:51:28 2026 +0700
+
+    Project setup
