@@ -207,6 +207,7 @@ def play_move(
 
     new_move.game_status = game.status
     new_move.score = game.score
+    new_move.solution = game.solution
 
     return new_move
 

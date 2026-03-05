@@ -90,5 +90,6 @@ class MoveResponse(BaseModel):
     created_at: datetime
     game_status: str | None = None
     score: int | None = None
+    solution:  str | None = None
 
     model_config = {"from_attributes": True}

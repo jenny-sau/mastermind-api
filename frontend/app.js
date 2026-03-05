@@ -506,7 +506,7 @@ for (let i = 0; i < move.wrong_positions; i++) {
 
 function handleGameStatus(result) {
 
-    if (result.status === "won") {
+    if (result.game_status === "won") {
 
         alert(`🎉 You won! Your score: ${result.score} points`);
 
@@ -517,7 +517,7 @@ function handleGameStatus(result) {
         }
     }
 
-    if (result.status === "lost") {
+    if (result.game_status === "lost") {
 
         alert("💀 You lost!");
 
