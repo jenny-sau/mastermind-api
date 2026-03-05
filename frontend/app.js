@@ -12,6 +12,24 @@ let currentRowIndex = 0;
 
 
 // ==========================
+// DOM
+// ==========================
+
+const authSection = document.getElementById("auth-section");
+const gameSection = document.getElementById("game-section");
+const playSection = document.getElementById("play-section");
+
+const loginForm = document.getElementById("login-form");
+const signupForm = document.getElementById("signup-form");
+
+const difficultyModal = document.getElementById("difficulty-modal");
+const difficultyRange = document.getElementById("difficulty-range");
+
+const board = document.getElementById("board");
+const palette = document.getElementById("color-palette");
+
+
+// ==========================
 // BEST SCORE
 // ==========================
 
@@ -23,21 +41,16 @@ async function fetchBestScore() {
   try {
 
     const response = await fetch(`${API_URL}/user/best-score`, {
-      headers: {
-        Authorization: `Bearer ${authToken}`
-      }
+      headers: { Authorization: `Bearer ${authToken}` }
     });
 
     if (!response.ok) return;
 
     const data = await response.json();
-
     document.getElementById("best-score-value").textContent = data.best_score;
 
-  } catch (error) {
-
+  } catch {
     console.log("Best score unavailable");
-
   }
 
 }
@@ -74,7 +87,7 @@ const difficultyMap = {
 
 
 // ==========================
-// AUTH LOGIN
+// LOGIN
 // ==========================
 
 loginForm.addEventListener("submit", async (e) => {
@@ -87,23 +100,14 @@ loginForm.addEventListener("submit", async (e) => {
   const response = await fetch(`${API_URL}/auth/login`, {
 
     method: "POST",
-
-    headers: {
-      "Content-Type": "application/json"
-    },
-
-    body: JSON.stringify({
-      username,
-      password
-    })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
 
   });
 
   if (!response.ok) {
-
     alert("Invalid credentials");
     return;
-
   }
 
   const data = await response.json();
@@ -128,57 +132,132 @@ document.getElementById("start-game-btn").addEventListener("click", async () => 
 
   const difficulty = difficultyMap[difficultyRange.value];
 
-  try {
+  const response = await fetch(`${API_URL}/game/create`, {
 
-    const response = await fetch(`${API_URL}/game/create`, {
+    method: "POST",
 
-      method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`
+    },
 
-      headers: {
+    body: JSON.stringify({ difficulty })
 
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`
+  });
 
-      },
+  if (!response.ok) {
+    alert("Error creating game");
+    return;
+  }
 
-      body: JSON.stringify({
-        difficulty
-      })
+  const game = await response.json();
 
-    });
+  currentGameId = game.id;
+  currentRowIndex = 0;
 
-    if (!response.ok) {
+  generateBoard(difficultyConfig[difficulty].rows);
+  renderColorPalette(difficulty);
 
-      alert("Error creating game");
-      return;
+  gameSection.style.display = "none";
+  playSection.style.display = "block";
+
+  resetGuess();
+
+});
+
+
+// ==========================
+// GENERATE BOARD
+// ==========================
+
+function generateBoard(rows) {
+
+  board.innerHTML = "";
+
+  for (let i = 0; i < rows; i++) {
+
+    const row = document.createElement("div");
+    row.classList.add("game-row");
+
+    for (let j = 0; j < 4; j++) {
+
+      const slot = document.createElement("div");
+      slot.classList.add("slot");
+      slot.dataset.index = j;
+
+      row.appendChild(slot);
 
     }
 
-    const game = await response.json();
+    const feedback = document.createElement("div");
+    feedback.classList.add("feedback");
 
-    currentGameId = game.id;
+    row.appendChild(feedback);
 
-    generateBoard(difficultyConfig[difficulty].rows);
-
-    renderColorPalette(difficulty);
-
-    currentRowIndex = 0;
-
-    difficultyModal.style.display = "none";
-
-    gameSection.style.display = "none";
-
-    playSection.style.display = "block";
-
-    resetGuess();
+    board.appendChild(row);
 
   }
 
-  catch (error) {
+}
 
-    alert("Connection error");
 
-  }
+// ==========================
+// COLOR PALETTE
+// ==========================
+
+function renderColorPalette(difficulty) {
+
+  palette.innerHTML = "";
+
+  difficultyConfig[difficulty].colors.forEach(color => {
+
+    const btn = document.createElement("div");
+
+    btn.classList.add("color-btn");
+    btn.style.backgroundColor = color;
+
+    btn.addEventListener("click", () => {
+
+      selectedColor = color;
+
+      document.querySelectorAll(".color-btn").forEach(b => {
+        b.style.outline = "none";
+      });
+
+      btn.style.outline = "3px solid white";
+
+    });
+
+    palette.appendChild(btn);
+
+  });
+
+}
+
+
+// ==========================
+// SLOT CLICK
+// ==========================
+
+board.addEventListener("click", (e) => {
+
+  const slot = e.target;
+
+  if (!slot.classList.contains("slot")) return;
+  if (!selectedColor) return;
+
+  const rows = document.querySelectorAll(".game-row");
+  const row = slot.parentElement;
+
+  const rowIndex = Array.from(rows).indexOf(row);
+
+  if (rowIndex !== currentRowIndex) return;
+
+  const index = slot.dataset.index;
+
+  slot.style.backgroundColor = selectedColor;
+
+  currentGuess[index] = selectedColor;
 
 });
 
@@ -196,49 +275,32 @@ document.getElementById("submit-guess-btn").addEventListener("click", async () =
 
   }
 
-  try {
+  const response = await fetch(`${API_URL}/game/${currentGameId}/move`, {
 
-    const response = await fetch(`${API_URL}/game/${currentGameId}/move`, {
+    method: "POST",
 
-      method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`
+    },
 
-      headers: {
+    body: JSON.stringify({
+      guess: currentGuess.join(",")
+    })
 
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`
+  });
 
-      },
-
-      body: JSON.stringify({
-
-        guess: currentGuess.join(",")
-
-      })
-
-    });
-
-    if (!response.ok) {
-
-      alert("Move error");
-      return;
-
-    }
-
-    const result = await response.json();
-
-    updateBoard(result);
-
-    handleGameStatus(result);
-
-    resetGuess();
-
+  if (!response.ok) {
+    alert("Move error");
+    return;
   }
 
-  catch (error) {
+  const result = await response.json();
 
-    alert("Connection error");
+  updateBoard(result);
+  handleGameStatus(result);
 
-  }
+  resetGuess();
 
 });
 
@@ -250,20 +312,35 @@ document.getElementById("submit-guess-btn").addEventListener("click", async () =
 function updateBoard(move) {
 
   const rows = document.querySelectorAll(".game-row");
-
-  if (currentRowIndex >= rows.length) return;
-
   const row = rows[currentRowIndex];
 
   const guessArray = move.guess.split(",");
-
   const slots = row.querySelectorAll(".slot");
 
   guessArray.forEach((color, index) => {
-
     slots[index].style.backgroundColor = color;
-
   });
+
+  const feedback = row.querySelector(".feedback");
+  feedback.innerHTML = "";
+
+  for (let i = 0; i < move.correct_positions; i++) {
+
+    const peg = document.createElement("div");
+    peg.classList.add("correct");
+
+    feedback.appendChild(peg);
+
+  }
+
+  for (let i = 0; i < move.wrong_positions; i++) {
+
+    const peg = document.createElement("div");
+    peg.classList.add("misplaced");
+
+    feedback.appendChild(peg);
+
+  }
 
   currentRowIndex++;
 
@@ -290,6 +367,8 @@ function handleGameStatus(result) {
 
     }
 
+    document.getElementById("submit-guess-btn").disabled = true;
+
   }
 
   if (result.status === "lost") {
@@ -297,14 +376,39 @@ function handleGameStatus(result) {
     alert("💀 You lost!");
 
     if (result.solution) {
-
       showSolution(result.solution);
-
     }
 
     document.getElementById("submit-guess-btn").disabled = true;
 
   }
+
+}
+
+
+// ==========================
+// SHOW SOLUTION
+// ==========================
+
+function showSolution(solution) {
+
+  const solutionRow = document.createElement("div");
+  solutionRow.classList.add("game-row");
+
+  const colors = solution.split(",");
+
+  colors.forEach(color => {
+
+    const slot = document.createElement("div");
+    slot.classList.add("slot");
+
+    slot.style.backgroundColor = color;
+
+    solutionRow.appendChild(slot);
+
+  });
+
+  board.appendChild(solutionRow);
 
 }
 
@@ -316,13 +420,10 @@ function handleGameStatus(result) {
 function resetGuess() {
 
   currentGuess = [null, null, null, null];
-
   selectedColor = null;
 
   document.querySelectorAll(".color-btn").forEach(btn => {
-
     btn.style.outline = "none";
-
   });
 
 }
