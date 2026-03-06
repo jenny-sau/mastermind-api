@@ -14,8 +14,8 @@ let currentRowIndex = 0;
 // Best score
 // ==========================
 
-let bestScore = localStorage.getItem("bestScore") || 0;
-document.getElementById("best-score-value").textContent = bestScore;
+
+
 
 async function fetchBestScore() {
 
@@ -507,24 +507,15 @@ for (let i = 0; i < move.wrong_positions; i++) {
 function handleGameStatus(result) {
 
     if (result.game_status === "won") {
-
         alert(`🎉 You won! Your score: ${result.score} points`);
-
-        if (result.score > bestScore) {
-            bestScore = result.score;
-            localStorage.setItem("bestScore", bestScore);
-            document.getElementById("best-score-value").textContent = bestScore;
-        }
-    }
+        fetchBestScore();
+    }  //
 
     if (result.game_status === "lost") {
-
         alert("💀 You lost!");
-
         if (result.solution) {
             showSolution(result.solution);
         }
-
         document.getElementById("submit-guess-btn").disabled = true;
     }
 }
