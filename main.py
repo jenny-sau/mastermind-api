@@ -198,7 +198,8 @@ def play_move(
     if is_game_won(game.solution, move_data.guess):
         game.status = "won"
         game.score = calculate_score(game.difficulty, turn_number)
-
+        if game.score > (current_user.best_score or 0):  # ← ensuite
+            current_user.best_score = game.score
     elif turn_number >= DIFFICULTY_MAX_TURNS[game.difficulty]:
         game.status = "lost"
 
@@ -276,3 +277,13 @@ def get_all_games(
 
     return games
 
+@app.get(
+    "/user/best-score",
+    status_code=status.HTTP_200_OK,
+    tags=["User"]
+)
+def get_best_score(
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return {"best_score": current_user.best_score or 0}

@@ -1,3 +1,5 @@
+from email.policy import default
+
 from sqlalchemy import(
     Column, Integer, String,
     ForeignKey, DateTime, Enum
@@ -15,6 +17,7 @@ class User(Base):
     id = Column(Integer, primary_key= True, index = True)
     username = Column(String, unique = True, index = True)
     password_hashed  = Column(String)
+    best_score = Column(Integer, default=0)
 
     # Relations
     games = relationship("Game", back_populates="user")

@@ -46,6 +46,7 @@ class UserResponse(BaseModel):
     """User returned after signup/login (no password!)"""
     id: int
     username: str
+    best_score: int = 0
 
     model_config = {"from_attributes": True}
 
