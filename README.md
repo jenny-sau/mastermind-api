@@ -1,6 +1,11 @@
 # MasterMind 
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Tests](https://img.shields.io/badge/tests-30%20passed-brightgreen)
+![Deployed](https://img.shields.io/badge/deployed-Railway-success)
 
 Un jeu web FullStack — une API REST en FastAPI connectée à un frontend HTML/CSS/JS, avec authentification JWT, base de données PostgreSQL et suite de tests complète.
+
+[Jouer en ligne](https://mastermind.jenny-dev.com)
 
 **Stack Technique:** 
 
@@ -24,16 +29,16 @@ Le Mastermind est un célèbre jeu dans lequel le but est de trouver une combina
 Les règles : Le joueur doit deviner quelles couleurs sont dans la combinaison et dans quel ordre. Pour cela, il teste des combinaisons et reçoit un feedback après chaque essai.
 
 
-#### Les Feedbacks:
+### Les Feedbacks:
  - Jeton blanc → bonne couleur, mauvais emplacement
  - Jeton noir → bonne couleur, bon emplacement
  - Aucun jeton → rien ne correspond
 - ⚫⚫⚫⚫ 4 jetons noirs → le joueur gagne la partie !
 
-#### Exemple de partie gagnante:
+### Exemple de partie gagnante:
 ![Swagger overview](screenshots/won.png)
 
-###### Les niveaux:
+### Les niveaux:
 J’ai décidé de créer 3 niveaux différents:
 
 | Niveau | Couleurs disponibles | Tours maximum |
@@ -47,7 +52,7 @@ J’ai décidé de créer 3 niveaux différents:
 |----------------------|---------------------|--------------------------|
 | ![](screenshots/easy.png) | ![](screenshots/medium.png) | ![](screenshots/hard.png) |
 
-#### Système de score
+### Système de score
 
 Le score dépend :
 - de la difficulté (multiplicateur)
@@ -83,6 +88,7 @@ Ce projet est un projet d'apprentissage avec trois objectifs :
 ### Prérequis
 - Python 3.11+
 - Docker 
+
 ```bash
 #  Cloner le repo
 git clone https://github.com/jenny-sau/mastermind-api
@@ -98,7 +104,11 @@ docker compose up -d
 uvicorn main:app --reload
 ```
 
-L'API est disponible sur http://localhost:8000 et la documentation Swagger sur http://localhost:8000/docs.
+## Déploiement
+
+- **Backend** : déployé sur [Railway](https://web-production-75841.up.railway.app/docs) avec PostgreSQL
+- **Frontend** : déployé sur [Netlify](https://69a844cfb1413af03b11a7c7--heartfelt-snickerdoodle-4d0028.netlify.app/)
+- **Domaine** : `mastermind.jenny-dev.com`
 
 
 ## Routes API
@@ -113,13 +123,10 @@ L'API est disponible sur http://localhost:8000 et la documentation Swagger sur h
 | GET | `/game/{id}/moves` | Historique des coups |
 | GET | `/games` | Toutes mes parties |
 
-## Améliorations futures
 
-### Améliorations prévues
-- Déploiement
-
-### Améliorations possible 
+### Amélioration possible futur
 - Permettre au joueur de consulter ses statistiques
+- Support mobile amélioré
 
 ## Tests:
 ```bash
