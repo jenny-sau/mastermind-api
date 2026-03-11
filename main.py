@@ -21,6 +21,12 @@ app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
+from sqlalchemy import text
+
+with engine.connect() as conn:
+    conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS best_score INTEGER DEFAULT 0"))
+    conn.commit()
+
 origins = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
