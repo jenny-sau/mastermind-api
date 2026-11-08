@@ -185,9 +185,10 @@ signupForm.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify({ username, password })
         });
+        const data = await response.json();
 
         if (!response.ok) {
-            alert("Signup failed");
+            alert(data.detail[0].msg);
             return;
         }
 
